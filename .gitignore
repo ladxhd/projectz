@@ -4,6 +4,8 @@ obj/
 bin/Debug
 bin/Release
 Content/bin/
+Content/obj/
+Source/
 # Binary assets
 *.gbs
 *.png

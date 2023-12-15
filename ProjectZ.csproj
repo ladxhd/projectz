@@ -39,6 +39,12 @@
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Source\**" />
+    <Content Remove="Source\**" />
+    <EmbeddedResource Remove="Source\**" />
+    <None Remove="Source\**" />
+  </ItemGroup>
   <PropertyGroup>
     <StartupObject>ProjectZ.Program</StartupObject>
     <AssemblyName>ProjectZ</AssemblyName>
@@ -52,5 +58,13 @@
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
+  </Target>
+  <Target Name="PreContentBuild" BeforeTargets="RunContentBuilder">
+    <Exec Command="echo D|xcopy /y /d /E &quot;$(SolutionDir)Source\ProjectZ\Content\*.png&quot; &quot;$(SolutionDir)Content&quot;" />
+    <Exec Command="echo D|xcopy /y /d /E &quot;$(SolutionDir)Source\ProjectZ\Content\*.wav&quot; &quot;$(SolutionDir)Content&quot;" />
+    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)bin\Data\&quot; &quot;$(TargetDir)Data&quot;" />
+    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.png&quot; &quot;$(TargetDir)Data&quot;" />
+    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.gbs&quot; &quot;$(TargetDir)Data&quot;" />
+    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.lng&quot; &quot;$(TargetDir)Data&quot;" />
   </Target>
 </Project>
