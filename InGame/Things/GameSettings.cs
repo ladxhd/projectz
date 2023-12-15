@@ -16,6 +16,9 @@ namespace ProjectZ.InGame.Things
         public static bool BorderlessWindowed = false;
         public static bool IsFullscreen = false;
 
+        public static int DamageMultiplier = 1;
+        public static bool NoHeartDrops = false;
+
         private static int _musicVolume = 100;
         private static int _effectVolume = 100;
 

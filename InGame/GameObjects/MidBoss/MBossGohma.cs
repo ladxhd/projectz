@@ -315,8 +315,11 @@ namespace ProjectZ.InGame.GameObjects.MidBoss
         private void OnDeath()
         {
             // spawn a heart
-            var objItem = new ObjItem(Map, (int)EntityPosition.X - 8, (int)EntityPosition.Y - 16, "j", null, "heart", null);
-            Map.Objects.SpawnObject(objItem);
+            if (!GameSettings.NoHeartDrops)
+            {
+                var objItem = new ObjItem(Map, (int)EntityPosition.X - 8, (int)EntityPosition.Y - 16, "j", null, "heart", null);
+                Map.Objects.SpawnObject(objItem);
+            }
 
             _damageField.IsActive = false;
 

@@ -325,7 +325,7 @@ namespace ProjectZ.InGame.Map
                 var random = Game1.RandomNumber.Next(0, 100);
                 if (random < 6)
                     strObject = "ruby";
-                else if (random < 9)
+                else if (!GameSettings.NoHeartDrops && random < 9)
                     strObject = "heart";
 
                 digTileIndex = result - 1;

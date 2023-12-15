@@ -486,7 +486,7 @@ namespace ProjectZ.InGame.GameObjects.Base.Components.AI
                 var random = Game1.RandomNumber.Next(0, 100);
                 if (random < 33)
                     strObject = "ruby";
-                else if (random < 40)
+                else if (!GameSettings.NoHeartDrops && random < 40)
                     strObject = "heart";
             }
 

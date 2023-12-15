@@ -35,6 +35,12 @@ namespace ProjectZ.InGame.Pages
                 Game1.UiPageManager.ChangePage(typeof(GameSettingsPage));
             }));
 
+            // modifier settings button
+            contentLayout.AddElement(new InterfaceButton(new Point(150, 25), new Point(1, 2), "settings_menu_modifier", element =>
+            {
+                Game1.UiPageManager.ChangePage(typeof(ModifierSettingsPage));
+            }));
+
             //// audio settings button
             //contentLayout.AddElement(new InterfaceButton(new Point(150, 25), new Point(1, 2), "settings_menu_audio", element =>
             //{

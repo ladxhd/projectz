@@ -142,8 +142,11 @@ namespace ProjectZ.InGame.GameObjects.Enemies
             Map.Objects.SpawnObject(animation);
 
             // spawn a heart
-            Map.Objects.SpawnObject(new ObjItem(Map,
-                (int)EntityPosition.X - 8, (int)EntityPosition.Y - 12, "j", null, "heart", null, true));
+            if (!GameSettings.NoHeartDrops)
+            {
+                Map.Objects.SpawnObject(new ObjItem(Map,
+                    (int)EntityPosition.X - 8, (int)EntityPosition.Y - 12, "j", null, "heart", null, true));
+            }
         }
 
         private void DespawnTick(double time)

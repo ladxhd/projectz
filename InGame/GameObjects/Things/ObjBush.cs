@@ -206,7 +206,7 @@ namespace ProjectZ.InGame.GameObjects.Things
                 var random = Game1.RandomNumber.Next(0, 100);
                 if (random < 6)
                     strObject = "ruby";
-                else if (random < 9)
+                else if (!GameSettings.NoHeartDrops && random < 9)
                     strObject = "heart";
 
                 // spawn a heart or a ruby

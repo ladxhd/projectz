@@ -39,6 +39,7 @@ gameover_quit Quit
 
 settings_menu_header Settings
 settings_menu_game Game
+settings_menu_modifier Modifiers
 settings_menu_audio Audio
 settings_menu_controls Controls
 settings_menu_video Video
@@ -56,6 +57,10 @@ settings_game_change_smooth_camera Smooth Camera
 settings_game_fullscreen_windowed Borderless Windowed
 settings_game_fullscreen_mode Fullscreen
 settings_game_items_on_right Items On Right
+
+settings_modifier_header Modifier Settings
+settings_modifier_damage Damage Multiplier:
+settings_modifier_no_hearts No Heart Drops
 
 settings_controls_header Control Settings
 settings_controls_keyboad Keyboard

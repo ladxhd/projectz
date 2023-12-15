@@ -55,6 +55,7 @@ namespace ProjectZ.InGame.Pages
             AddPage(new NewGamePage(_width, _height));
             AddPage(new SettingsPage(_width, _height));
             AddPage(new GameSettingsPage(_width, _height));
+            AddPage(new ModifierSettingsPage(_width, _height));
             //AddPage(new AudioSettingsPage(_width, _height));
             AddPage(new ControlSettingsPage(_width, _height));
             AddPage(new GraphicSettingsPage(_width, _height));
