@@ -62,6 +62,7 @@
   <Target Name="PreContentBuild" BeforeTargets="RunContentBuilder">
     <Exec Command="echo D|xcopy /y /d /E &quot;$(SolutionDir)Source\ProjectZ\Content\*.png&quot; &quot;$(SolutionDir)Content&quot;" />
     <Exec Command="echo D|xcopy /y /d /E &quot;$(SolutionDir)Source\ProjectZ\Content\*.wav&quot; &quot;$(SolutionDir)Content&quot;" />
+    <Exec Command="echo F|xcopy /y /d &quot;$(SolutionDir)Source\ProjectZ\Resources\Icon.ico&quot; &quot;$(SolutionDir)Resources\Icon.ico&quot;" />
     <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)bin\Data\&quot; &quot;$(TargetDir)Data&quot;" />
     <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.png&quot; &quot;$(TargetDir)Data&quot;" />
     <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.gbs&quot; &quot;$(TargetDir)Data&quot;" />
