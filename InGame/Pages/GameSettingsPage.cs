@@ -21,14 +21,6 @@ namespace ProjectZ.InGame.Pages
 
             var contentLayout = new InterfaceListLayout { Size = new Point(width, (int)(height * Values.MenuContentSize)), Selectable = true, ContentAlignment = InterfaceElement.Gravities.Top };
 
-            contentLayout.AddElement(new InterfaceSlider(Resources.GameFont, "settings_audio_music_volume",
-                buttonWidth, new Point(1, 2), 0, 100, 5, GameSettings.MusicVolume, number => { GameSettings.MusicVolume = number; })
-            { SetString = number => " " + number + "%" });
-
-            contentLayout.AddElement(new InterfaceSlider(Resources.GameFont, "settings_audio_effect_volume",
-                buttonWidth, new Point(1, 2), 0, 100, 5, GameSettings.EffectVolume, number => { GameSettings.EffectVolume = number; })
-            { SetString = number => " " + number + "%" });
-
             contentLayout.AddElement(new InterfaceButton(new Point(buttonWidth, 18), new Point(0, 2), "settings_game_language", PressButtonLanguageChange));
 
             var toggleAutosave = InterfaceToggle.GetToggleButton(new Point(buttonWidth, 18), new Point(5, 2),
