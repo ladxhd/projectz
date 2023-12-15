@@ -14,6 +14,6 @@ Unlike the 1.0.0 version of ProjectZ, this repo will *not* publish as a single e
 ## Build Instructions
 
 * Clone repo somewhere.
-* Run `dotnet tool install dotnet-mgcb` in the project folder.
+* Run `dotnet restore` in the project folder.
 * Extract the original source archive (`source.7z md5: 4871f9fce7ae06d14aedbb33a88b18a8`) to the Source folder. The folder should contain a ProjectZ folder.
 * Building from Visual Studio 2022 will copy assets from the Source folder to the Content and Data folders automatically.
