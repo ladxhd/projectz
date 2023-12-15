@@ -66,6 +66,6 @@
     <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)bin\Data\&quot; &quot;$(TargetDir)Data&quot;" />
     <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.png&quot; &quot;$(TargetDir)Data&quot;" />
     <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.gbs&quot; &quot;$(TargetDir)Data&quot;" />
-    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.lng&quot; &quot;$(TargetDir)Data&quot;" />
+    <Exec Command="echo F|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\Languages\dialog_eng.lng&quot; &quot;$(TargetDir)Data\Languages\dialog_eng.lng&quot;" />
   </Target>
 </Project>

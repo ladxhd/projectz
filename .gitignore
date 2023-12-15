@@ -12,4 +12,4 @@ Source/ProjectZ/
 *.wav
 *.ico
 # Other assets
-*.lng
+bin/Data/Languages/dialog_eng.lng
