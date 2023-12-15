@@ -1,0 +1,9 @@
+# Folders
+.vs/
+# Binary assets
+*.gbs
+*.png
+*.wav
+*.ico
+# Other assets
+*.lng
