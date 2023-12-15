@@ -2,6 +2,8 @@
 
 This is the source code for ProjectZ, and *only* the source code -- most of the original assets (sprite sheets, sound effects etc.) have been removed, and must be provided by the user. The project builds with MonoGame 3.8.1.303, which is newer than the version ProjectZ 1.0.0 originally shipped with.
 
+Unlike the 1.0.0 version of ProjectZ, this repo will *not* publish as a single executable file, which appears to be an unsupported build configuration in MonoGame 3.8.1.303. This means the .NET assemblies ProjectZ uses will be included in builds.
+
 ## Requirements
 
 * .NET 6
