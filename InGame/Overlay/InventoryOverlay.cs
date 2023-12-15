@@ -147,6 +147,8 @@ namespace ProjectZ.InGame.Overlay
                         selectionOffset += 1;
                     else if (dir == 3)
                         selectionOffset += ItemSlotWidth;
+
+                    Game1.GameManager.PlaySoundEffect("D360-10-0A");
                 }
 
                 _selectionButtonPressed = true;
