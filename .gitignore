@@ -5,7 +5,7 @@ bin/Debug
 bin/Release
 Content/bin/
 Content/obj/
-Source/
+Source/ProjectZ/
 # Binary assets
 *.gbs
 *.png
