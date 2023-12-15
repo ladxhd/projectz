@@ -24,7 +24,7 @@ namespace ProjectZ.InGame.Pages
             contentLayout.AddElement(new InterfaceSlider(Resources.GameFont, "settings_modifier_damage",
             buttonWidth, new Point(1, 2), 0, 4, 1, GameSettings.DamageMultiplier,
             number => { GameSettings.DamageMultiplier = number; })
-            { SetString = number => " " + GameSettings.DamageMultiplier + " x" });
+            { SetString = number => " x" + GameSettings.DamageMultiplier });
 
             var toggleNoHearts = InterfaceToggle.GetToggleButton(new Point(buttonWidth, 18), new Point(5, 2),
                 "settings_modifier_no_hearts", GameSettings.NoHeartDrops, newState => { GameSettings.NoHeartDrops = newState; });
