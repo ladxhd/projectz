@@ -77,20 +77,41 @@ namespace ProjectZ.InGame.Overlay
             _rubeeBackground.BackgroundColor = Values.OverlayBackgroundColor * transparency;
             _rubeeBackground.BlurColor = Values.OverlayBackgroundBlurColor * transparency;
 
-            // bottom left
-            _itemSlotOverlay.UpdatePositions(_gameUiWindow, new Point(-(int)(fadePercentage * FadeOffsetBackground * Game1.UiScale), 0), Game1.UiScale);
-            _itemSlotOverlay.SetTransparency(transparency);
-
             // bottom right
-            _saveIconPosition = new Vector2(
-                _gameUiWindow.X + _gameUiWindow.Width - _saveIcon.SourceRectangle.Width * Game1.UiScale - 16 * Game1.UiScale,
-                _gameUiWindow.Y + _gameUiWindow.Height - _saveIcon.SourceRectangle.Height * Game1.UiScale - 16 * Game1.UiScale);
+            if (GameSettings.ItemsOnRight)
+            {
+                _itemSlotOverlay.UpdatePositions(_gameUiWindow, new Point((int)(fadePercentage * FadeOffsetBackground * Game1.UiScale), 0), Game1.UiScale);
+
+                // save icon in bottom left
+                _saveIconPosition = new Vector2(
+                    _gameUiWindow.X + _saveIcon.SourceRectangle.Width * Game1.UiScale,
+                    _gameUiWindow.Y + _gameUiWindow.Height - _saveIcon.SourceRectangle.Height * Game1.UiScale - 16 * Game1.UiScale);
+            }
+            // bottom left
+            else
+            {
+                _itemSlotOverlay.UpdatePositions(_gameUiWindow, new Point(-(int)(fadePercentage * FadeOffsetBackground * Game1.UiScale), 0), Game1.UiScale);
+
+                // save icon in bottom right
+                _saveIconPosition = new Vector2(
+                    _gameUiWindow.X + _gameUiWindow.Width - _saveIcon.SourceRectangle.Width * Game1.UiScale - 16 * Game1.UiScale,
+                    _gameUiWindow.Y + _gameUiWindow.Height - _saveIcon.SourceRectangle.Height * Game1.UiScale - 16 * Game1.UiScale);
+            }
+            _itemSlotOverlay.SetTransparency(transparency);
         }
 
         public void DrawTop(SpriteBatch spriteBatch, float fadePercentage, float transparency)
         {
             // draw the item slots
-            ItemSlotOverlay.Draw(spriteBatch, _itemSlotOverlay.ItemSlotPosition - new Point((int)(fadePercentage * FadeOffset * Game1.UiScale), 0), Game1.UiScale, transparency);
+            if (GameSettings.ItemsOnRight)
+            {
+                ItemSlotOverlay.Draw(spriteBatch, _itemSlotOverlay.ItemSlotPosition + new Point((int)(fadePercentage * FadeOffset * Game1.UiScale), 0), Game1.UiScale, transparency);
+            }
+            else
+            {
+
+                ItemSlotOverlay.Draw(spriteBatch, _itemSlotOverlay.ItemSlotPosition - new Point((int)(fadePercentage * FadeOffset * Game1.UiScale), 0), Game1.UiScale, transparency);
+            }
 
             //DrawHelper.DrawSmallKeys(spriteBatch, _keyPosition, Game1.UiScale, Color.White * transparency);
 

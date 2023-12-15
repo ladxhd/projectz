@@ -35,6 +35,10 @@ namespace ProjectZ.InGame.Pages
                 "settings_game_autosave", GameSettings.Autosave, newState => { GameSettings.Autosave = newState; });
             contentLayout.AddElement(toggleAutosave);
 
+            var toggleItemSlotSide = InterfaceToggle.GetToggleButton(new Point(buttonWidth, 18), new Point(5, 2),
+                "settings_game_items_on_right", GameSettings.ItemsOnRight, newState => { GameSettings.ItemsOnRight = newState; });
+            contentLayout.AddElement(toggleItemSlotSide);
+
             gameSettingsList.AddElement(contentLayout);
 
             _bottomBar = new InterfaceListLayout() { Size = new Point(width, (int)(height * Values.MenuFooterSize)), Selectable = true, HorizontalMode = true };

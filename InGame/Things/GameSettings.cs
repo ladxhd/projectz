@@ -6,6 +6,8 @@ namespace ProjectZ.InGame.Things
         public static int UiScale = 0;
         public static int GameScale = 11; // autoscale
 
+        public static bool ItemsOnRight = false;
+
         public static bool EnableShadows = true;
         public static bool LockFps = true;
         public static bool Autosave = true;

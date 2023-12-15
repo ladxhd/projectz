@@ -62,8 +62,20 @@ namespace ProjectZ.InGame.Overlay
 
         public void UpdatePositions(Rectangle uiWindow, Point offset, int scale)
         {
-            // bottom left corner
-            ItemSlotPosition = new Point(uiWindow.X + 16 * scale,
+            int x;
+
+            if (GameSettings.ItemsOnRight)
+            {
+                // bottom right corner
+                x = uiWindow.X + uiWindow.Width - (RecItemselection.Width * 2 + DistX * 2 + 16) * scale;
+            }
+            else
+            {
+                // bottom left corner
+                x = uiWindow.X + 16 * scale;
+            }
+
+            ItemSlotPosition = new Point(x,
                 uiWindow.Y + uiWindow.Height - (RecItemselection.Height * 3 + DistY * 2 + 16) * scale);
 
             // update the background rectangles
