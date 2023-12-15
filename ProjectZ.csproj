@@ -34,41 +34,12 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct2D1">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D11">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.Direct3D11.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D9">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.Direct3D9.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.DXGI.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Mathematics">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.MediaFoundation">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.MediaFoundation.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.XAudio2">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.XAudio2.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.XInput">
-      <HintPath>..\MonoGame\Artifacts\MonoGame.Framework\WindowsDX\Release\SharpDX.XInput.dll</HintPath>
-    </Reference>
+    <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <PropertyGroup>
-    <DotnetCommand Condition="'$(DotnetCommand)' == ''">dotnet</DotnetCommand>
-    <EnableMGCBItems Condition="'$(EnableMGCBItems)' == ''">true</EnableMGCBItems>
-    <MGCBCommand>..\MonoGame\Artifacts\MonoGame.Content.Builder\Debug\mgcb.dll</MGCBCommand>
     <StartupObject>ProjectZ.Program</StartupObject>
     <AssemblyName>ProjectZ</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
@@ -78,5 +49,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
   </PropertyGroup>
-  <Import Project="..\MonoGame\\Tools\MonoGame.Content.Builder.Task\MonoGame.Content.Builder.Task.targets" />
+  <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
+    <Message Text="Restoring dotnet tools" Importance="High" />
+    <Exec Command="dotnet tool restore" />
+  </Target>
 </Project>

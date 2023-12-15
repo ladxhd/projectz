@@ -1,5 +1,9 @@
 # Folders
 .vs/
+obj/
+bin/Debug
+bin/Release
+Content/bin/
 # Binary assets
 *.gbs
 *.png
