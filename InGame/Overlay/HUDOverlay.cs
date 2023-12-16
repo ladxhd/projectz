@@ -13,6 +13,7 @@ namespace ProjectZ.InGame.Overlay
 
         private readonly UiRectangle _heartBackground;
         private readonly UiRectangle _rubeeBackground;
+        private readonly UiRectangle _keyBackground;
 
         private readonly DictAtlasEntry _saveIcon;
 
@@ -21,6 +22,7 @@ namespace ProjectZ.InGame.Overlay
         private Point _heartPosition;
         private Point _rubeePosition;
         private Vector2 _saveIconPosition;
+        private Point _keyPosition;
 
         private const int FadeOffsetBackground = 10;
         private const int FadeOffset = 13;
@@ -36,6 +38,9 @@ namespace ProjectZ.InGame.Overlay
 
             _rubeeBackground = new UiRectangle(Rectangle.Empty, "rubee", Values.ScreenNameGame, Values.OverlayBackgroundColor, Values.OverlayBackgroundBlurColor, null) { Radius = Values.UiBackgroundRadius };
             Game1.EditorUi.AddElement(_rubeeBackground);
+
+            _keyBackground = new UiRectangle(Rectangle.Empty, "rubee", Values.ScreenNameGame, Values.OverlayBackgroundColor, Values.OverlayBackgroundBlurColor, null) { Radius = Values.UiBackgroundRadius };
+            Game1.EditorUi.AddElement(_keyBackground);
 
             _saveIcon = Resources.GetSprite("save_icon");
         }
@@ -68,7 +73,7 @@ namespace ProjectZ.InGame.Overlay
             _heartBackground.BackgroundColor = Values.OverlayBackgroundColor * transparency;
             _heartBackground.BlurColor = Values.OverlayBackgroundBlurColor * transparency;
 
-            // top right
+            // top right, rupees
             _rubeePosition = new Point(
                 _gameUiWindow.X + _gameUiWindow.Width - ItemDrawHelper.RubeeSize.X * Game1.UiScale - 16 * Game1.UiScale,
                 _gameUiWindow.Y + 16 * Game1.UiScale);
@@ -76,6 +81,23 @@ namespace ProjectZ.InGame.Overlay
             _rubeeBackground.Rectangle.X += (int)(fadePercentage * FadeOffsetBackground * Game1.UiScale);
             _rubeeBackground.BackgroundColor = Values.OverlayBackgroundColor * transparency;
             _rubeeBackground.BlurColor = Values.OverlayBackgroundBlurColor * transparency;
+
+            // top right, keys
+            _keyPosition = new Point(
+                _gameUiWindow.X + _gameUiWindow.Width - ItemDrawHelper.KeySize.X * Game1.UiScale - 16 * Game1.UiScale,
+                _gameUiWindow.Y + 16 * 2 * Game1.UiScale);
+            _keyBackground.Rectangle = ItemDrawHelper.GetKeyRectangle(new Point(_keyPosition.X, _keyPosition.Y), Game1.UiScale);
+            _keyBackground.Rectangle.X += (int)(fadePercentage * FadeOffsetBackground * Game1.UiScale);
+            if (Game1.GameManager.GetItem("smallkey") is null)
+            {
+                _keyBackground.BackgroundColor = Values.OverlayBackgroundColor * 0.0f;
+                _keyBackground.BlurColor = Values.OverlayBackgroundBlurColor * 0.0f;
+            }
+            else
+            {
+                _keyBackground.BackgroundColor = Values.OverlayBackgroundColor * transparency;
+                _keyBackground.BlurColor = Values.OverlayBackgroundBlurColor * transparency;
+            }
 
             // bottom right
             if (GameSettings.ItemsOnRight)
@@ -113,7 +135,8 @@ namespace ProjectZ.InGame.Overlay
                 ItemSlotOverlay.Draw(spriteBatch, _itemSlotOverlay.ItemSlotPosition - new Point((int)(fadePercentage * FadeOffset * Game1.UiScale), 0), Game1.UiScale, transparency);
             }
 
-            //DrawHelper.DrawSmallKeys(spriteBatch, _keyPosition, Game1.UiScale, Color.White * transparency);
+            // draw dungeon keys
+            ItemDrawHelper.DrawSmallKeys(spriteBatch, _keyPosition + new Point((int)(fadePercentage * FadeOffset * Game1.UiScale), 0), Game1.UiScale, Color.White * transparency);
 
             // draw the rubees
             ItemDrawHelper.DrawRubee(spriteBatch, _rubeePosition + new Point((int)(fadePercentage * FadeOffset * Game1.UiScale), 0), Game1.UiScale, Color.Black * transparency);

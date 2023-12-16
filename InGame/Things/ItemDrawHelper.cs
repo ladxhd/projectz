@@ -11,10 +11,12 @@ namespace ProjectZ.InGame.Things
         private static DictAtlasEntry SpriteLetter;
         private static DictAtlasEntry SpriteHeart;
         private static DictAtlasEntry SpriteRubee;
+        private static DictAtlasEntry SpriteKey;
 
         private static Rectangle RecLetters;
         private static Rectangle RecHeart;
         private static Rectangle RecRubee;
+        private static Rectangle RecKey;
 
         private static int _hearthDistance = 1;
         private static int _heartsDistance = 1;
@@ -22,6 +24,7 @@ namespace ProjectZ.InGame.Things
         private static readonly int LetterMargin = 1;
 
         public static Point RubeeSize;
+        public static Point KeySize;
 
         private static int _paddingHud = 4;
 
@@ -56,12 +59,15 @@ namespace ProjectZ.InGame.Things
             SpriteLetter = Resources.GetSprite("ui letter");
             SpriteHeart = Resources.GetSprite("ui heart");
             SpriteRubee = Resources.GetSprite("ui ruby");
+            SpriteKey = Resources.GetSprite("smallkey");
 
             RecLetters = SpriteLetter.ScaledRectangle;
             RecHeart = SpriteHeart.ScaledRectangle;
             RecRubee = SpriteRubee.ScaledRectangle;
+            RecKey = SpriteKey.ScaledRectangle;
 
             RubeeSize = new Point((RecLetters.Width + LetterMargin) * 3 + RecRubee.Width, RecRubee.Height);
+            KeySize = new Point((RecLetters.Width + LetterMargin) * 3 + RecKey.Width, RecKey.Height);
         }
 
         public static void Init()
@@ -472,25 +478,30 @@ namespace ProjectZ.InGame.Things
         //    }
         //}
 
-        //public static void DrawSmallKeys(SpriteBatch spriteBatch, Rectangle position)
-        //{
-        //    var keyItem = Game1.GameManager.GetItem("smallkey");
+        public static Rectangle GetKeyRectangle(Point position, int scale)
+        {
+            return new Rectangle(
+                position.X - _paddingHud * scale, position.Y - _paddingHud * scale,
+                ((RecLetters.Width + LetterMargin) * 3 + RecKey.Width + _paddingHud * 2) * scale,
+                (RecLetters.Height + _paddingHud * 2) * scale);
+        }
 
-        //    if (keyItem == null) return;
+        public static void DrawSmallKeys(SpriteBatch spriteBatch, Point position, int scale, Color color)
+        {
+            var keyItem = Game1.GameManager.GetItem("smallkey");
 
-        //    var size = new Point(_recKey.Width  + _letterSize.X , _recKey.Height );
+            if (keyItem == null) return;
 
-        //    var drawPosition = new Point(position.X + position.Width / 2 - size.X / 2, position.Y + position.Height / 2 - size.Y / 2);
+            // draw the key icon
+            // TODO: actual key icon instead of using the smallkey sprite
+            spriteBatch.Draw(SpriteKey.Texture, new Rectangle(
+                    position.X + (RecLetters.Width + LetterMargin) * 3 * scale,
+                    position.Y - 3 * scale,
+                    RecKey.Width * scale,
+                    RecKey.Height * scale), RecKey, Color.White * (color.A / 255f));
 
-        //    // draw the key icon
-        //    spriteBatch.Draw(Resources.SprUI, new Rectangle(
-        //        drawPosition.X, drawPosition.Y, _recKey.Width , _recKey.Height ), _recKey, Color.White * transparency);
-
-        //    // draw the number
-        //    DrawNumber(spriteBatch,
-        //        drawPosition.X + _recKey.Width ,
-        //        drawPosition.Y + (_recKey.Height / 2 - Values.LetterHeight / 2) ,
-        //        keyItem.Count, 1, _uiScale, Color.White * transparency);
-        //}
+            // draw the number
+            DrawNumber(spriteBatch, position.X, position.Y, keyItem.Count, 3, scale, Color.Black * (color.A / 255f));
+        }
     }
 }
