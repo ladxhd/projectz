@@ -2,6 +2,7 @@ main_menu_select_header Player Select
 main_menu_bottom_header 
 main_menu_new_game New Game
 main_menu_settings Settings
+main_menu_exit Exit
 main_menu_copy Copy
 main_menu_erase Erase
 

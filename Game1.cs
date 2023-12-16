@@ -26,6 +26,8 @@ namespace ProjectZ
 {
     public class Game1 : Game
     {
+        public static Game Instance;
+
         public static GraphicsDeviceManager Graphics;
         public static SpriteBatch SpriteBatch;
 
@@ -144,6 +146,8 @@ namespace ProjectZ
 
         public Game1(bool editorMode, bool loadFirstSave)
         {
+            Instance = this;
+
 #if WINDOWS
             _windowForm = (Forms.Form)Forms.Control.FromHandle(Window.Handle);
             _windowForm.Icon = Properties.Resources.Icon;
