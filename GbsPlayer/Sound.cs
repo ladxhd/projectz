@@ -5,7 +5,8 @@ namespace GbsPlayer
 {
     public class Sound
     {
-        public CDynamicEffectInstance _soundOutput;
+        public DynamicAudio _soundOutput;
+        //public CDynamicEffectInstance _soundOutput;
 
         public bool WasStopped;
         private int _endBufferCount;
@@ -133,7 +134,9 @@ namespace GbsPlayer
 
         public Sound()
         {
-            _soundOutput = new CDynamicEffectInstance(OutputRate);
+            //Creates the XAudio format, needs to be re-written to NAudio
+            _soundOutput = new DynamicAudio(OutputRate);
+            //_soundOutput = new CDynamicEffectInstance(OutputRate);
         }
 
         public void Init()
