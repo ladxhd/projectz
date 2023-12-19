@@ -27,6 +27,7 @@ namespace ProjectZ
             catch (Exception exception)
             {
                //MessageBox.Show(exception.StackTrace, exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+               Console.Out.WriteLine(exception);
                throw;
             }
         }
