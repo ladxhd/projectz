@@ -196,7 +196,10 @@ namespace ProjectZ.InGame.GameObjects.NPCs
 
             // start playing owl music; not in the final scene
             if (Game1.GameManager.GetCurrentMusic() != 88)
+            {
                 Game1.GameManager.SetMusic(33, 2);
+                Game1.GbsPlayer.SetVolumeMultiplier(1);
+            }
 
             MapManager.ObjLink.FreezePlayer();
             _wasTriggered = true;
@@ -317,6 +320,7 @@ namespace ProjectZ.InGame.GameObjects.NPCs
 
             // stop playing music
             Game1.GameManager.SetMusic(-1, 2);
+            Game1.GbsPlayer.SetVolumeMultiplier(1);
         }
 
         private void UpdateLeave()
