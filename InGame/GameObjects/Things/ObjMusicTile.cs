@@ -11,8 +11,8 @@ namespace ProjectZ.InGame.GameObjects.Things
     {
         private string[,] _musicData;
         private string _lastTrack;
+        private float _transitionCount;
 
-        // @TODO: fade in/out
         public ObjMusicTile() : base("editor music") { }
 
         public ObjMusicTile(Map.Map map, int posX, int posY) : base(map)
@@ -36,9 +36,27 @@ namespace ProjectZ.InGame.GameObjects.Things
                 if (_lastTrack != track)
                 {
                     _lastTrack = track;
+                    _transitionCount += Game1.DeltaTime;
+                }
+            }
 
-                    if (int.TryParse(track, out var songNr))
-                        Game1.GameManager.SetMusic(songNr, 0, false);
+            if (_transitionCount > 0)
+            {
+                // fade out current music
+                var transitionState = _transitionCount / 1000;
+                var newVolume = 1 - MathHelper.Clamp(transitionState, 0, 1);
+                Game1.GbsPlayer.SetVolumeMultiplier(newVolume);
+
+                // transition to new music
+                if (int.TryParse(_lastTrack, out var songNr) && newVolume <= 0)
+                {
+                    Game1.GameManager.SetMusic(songNr, 0, false);
+                    Game1.GbsPlayer.SetVolumeMultiplier(1);
+                    _transitionCount = 0;
+                }
+                else
+                {
+                    _transitionCount += Game1.DeltaTime;
                 }
             }
         }
