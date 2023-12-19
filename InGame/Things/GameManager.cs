@@ -849,7 +849,16 @@ namespace ProjectZ.InGame.Things
 
                 // finished playing?
                 if (soundEffect.Value.Instance.State == SoundState.Stopped)
+                {
+                    // reset volume if it was lowered
+                    if (lowerVolume)
+                    {
+                        lowerVolume = false;
+                        Game1.GbsPlayer.SetVolumeMultiplier(1);
+                    }
+
                     CurrentSoundEffects.Remove(soundEffect.Key);
+                }
             }
 
             if (lowerVolume)
