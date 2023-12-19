@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows.Forms;
+//using System.Windows.Forms; // windows only :(
 
 namespace ProjectZ
 {
@@ -26,7 +26,7 @@ namespace ProjectZ
             }
             catch (Exception exception)
             {
-               MessageBox.Show(exception.StackTrace, exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+               //MessageBox.Show(exception.StackTrace, exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                throw;
             }
         }
