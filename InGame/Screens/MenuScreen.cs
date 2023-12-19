@@ -130,7 +130,7 @@ namespace ProjectZ.InGame.Screens
 
                 var selectTextSize = Resources.GameFont.MeasureString(inputHelper);
                 spriteBatch.DrawString(Resources.GameFont, inputHelper,
-                    new Vector2(_menuRectangle.Right - (selectTextSize.X + 2) * _scale, _menuRectangle.Bottom - 9 * _scale), Color.White, 0, Vector2.Zero, _scale, SpriteEffects.None, 0);
+                    new Vector2(_menuRectangle.Right - (selectTextSize.X + 2) * _scale, _menuRectangle.Bottom - selectTextSize.Y * _scale), Color.White, 0, Vector2.Zero, _scale, SpriteEffects.None, 0);
             }
 
             spriteBatch.End();
