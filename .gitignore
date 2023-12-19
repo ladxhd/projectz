@@ -3,6 +3,8 @@
 obj/
 bin/Debug
 bin/Release
+Data/*
+Resources/*
 Content/bin/
 Content/obj/
 Source/ProjectZ/

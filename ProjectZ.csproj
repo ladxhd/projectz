@@ -1,16 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <TargetFramework>net6.0</TargetFramework>
+    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
-    <UseWindowsForms>true</UseWindowsForms>
-    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <UseWindowsForms>false</UseWindowsForms>
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath></OutputPath>
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <!-- <DefineConstants>TRACE;WINDOWS</DefineConstants> -->
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Content\bin\**" />
@@ -27,16 +27,16 @@
     <None Remove=".gitignore" />
     <None Remove=".gitmodules" />
   </ItemGroup>
-  <ItemGroup>
-    <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
-  </ItemGroup>
+  <!-- <ItemGroup> -->
+    <!-- <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" /> -->
+  <!-- </ItemGroup> -->
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
+    <!-- <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.1.303" /> -->
+    <!-- <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" /> -->
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
@@ -47,25 +47,24 @@
   </ItemGroup>
   <PropertyGroup>
     <StartupObject>ProjectZ.Program</StartupObject>
-    <AssemblyName>ProjectZ</AssemblyName>
+    <AssemblyName>Link's Awakening DX HD</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <!-- <DefineConstants>TRACE;WINDOWS</DefineConstants> -->
   </PropertyGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
   </Target>
   <Target Name="PreContentBuild" BeforeTargets="RunContentBuilder">
-    <Exec Command="echo D|xcopy /y /d /E &quot;$(SolutionDir)Source\ProjectZ\Content\*.png&quot; &quot;$(SolutionDir)Content&quot;" />
-    <Exec Command="echo D|xcopy /y /d /E &quot;$(SolutionDir)Source\ProjectZ\Content\*.wav&quot; &quot;$(SolutionDir)Content&quot;" />
-    <Exec Command="echo F|xcopy /y /d &quot;$(SolutionDir)Source\ProjectZ\Resources\Icon.ico&quot; &quot;$(SolutionDir)Resources\Icon.ico&quot;" />
-    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)bin\Data\&quot; &quot;$(TargetDir)Data&quot;" />
-    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.png&quot; &quot;$(TargetDir)Data&quot;" />
-    <Exec Command="echo D|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\*.gbs&quot; &quot;$(TargetDir)Data&quot;" />
-    <Exec Command="echo F|xcopy /y /E &quot;$(SolutionDir)Source\ProjectZ\bin\Data\Languages\dialog_eng.lng&quot; &quot;$(TargetDir)Data\Languages\dialog_eng.lng&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.png&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Content/&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.wav&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Content/&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.ico&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.png&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.gbs&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.lng&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
   </Target>
 </Project>
