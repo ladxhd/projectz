@@ -18,7 +18,6 @@ namespace ProjectZ.InGame.GameObjects.NPCs
         private readonly AiComponent _aiComponent;
 
         private Animator _animator;
-        private float _landingSpeed = 0.125f;
 
         private CPosition _owlPosition;
 

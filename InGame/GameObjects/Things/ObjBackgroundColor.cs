@@ -11,7 +11,7 @@ namespace ProjectZ.InGame.GameObjects.Things
     class ObjBackgroundColor : GameObject
     {
         public Color BackgroundColor = Color.White;
-        public float Percentage;
+        public float Percentage = 0;
 
         public ObjBackgroundColor() : base((Map.Map) null)
         {

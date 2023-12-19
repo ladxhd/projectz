@@ -18,7 +18,6 @@ namespace ProjectZ.InGame.Screens
         private Rectangle _menuRectangle;
 
         private Vector2 _linkPosition;
-        private bool _linkVisible;
 
         private int _scale = 3;
         private int _menuWidth;
@@ -84,7 +83,6 @@ namespace ProjectZ.InGame.Screens
                 // update the animation
                 _linkAnimation.Update();
 
-                _linkVisible = false;
                 var mainMenuPage = (MainMenuPage)Game1.UiPageManager.GetPage(typeof(MainMenuPage));
 
                 if (Game1.UiPageManager.PageStack.Count == 1)
@@ -92,7 +90,6 @@ namespace ProjectZ.InGame.Screens
                     {
                         if (saveButton.Selected)
                         {
-                            _linkVisible = true;
                             _linkPosition = new Vector2(saveButton.Position.X + 22, saveButton.Position.Y + 22);
                         }
                     }

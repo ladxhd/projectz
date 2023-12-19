@@ -54,7 +54,6 @@ namespace ProjectZ.Editor
             var buttonWidth = _toolBarWidth - 10;
             var buttonHalfWidth = _toolBarWidth / 2 - 15;
             var buttonHeight = 30;
-            var lableHeight = 20;
             var buttonQWidth = buttonWidth - 2 * 5 - buttonHeight * 2;
             var dist = 5;
             var bigDist = 16;

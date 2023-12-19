@@ -26,8 +26,8 @@ namespace ProjectZ.Editor
         private UiNumberInput _animationInput, _frameInput, _numberInputX, _numberInputY, _numberInputWidth, _numberInputHeight;
         private UiNumberInput _niOffsetX, _niOffsetY, _niAnOffsetX, _niAnOffsetY, _fpsInput, _loopCountInput;
         private UiTextInput _animationName, _nextAnimationName;
-        private UiLabel _animationUiLabel, _frameUiLabel;
-        private UiCheckBox _checkBoxLoop, _cbFrameMirroredV, _cbFrameMirroredH;
+        private UiLabel _animationUiLabel;
+        private UiCheckBox _cbFrameMirroredV, _cbFrameMirroredH;
 
         private string _sprPath;
         private string _lastFileName;

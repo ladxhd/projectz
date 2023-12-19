@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ProjectZ.Base
 {
@@ -56,6 +57,43 @@ namespace ProjectZ.Base
         {
             return Left <= value.X && value.X <= Right &&
                    Back <= value.Y && value.Y <= Front;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Box box &&
+                   X == box.X &&
+                   Y == box.Y &&
+                   Z == box.Z &&
+                   Width == box.Width &&
+                   Height == box.Height &&
+                   Depth == box.Depth &&
+                   Left == box.Left &&
+                   Right == box.Right &&
+                   Back == box.Back &&
+                   Front == box.Front &&
+                   Top == box.Top &&
+                   Bottom == box.Bottom &&
+                   Center.Equals(box.Center);
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+            hash.Add(X);
+            hash.Add(Y);
+            hash.Add(Z);
+            hash.Add(Width);
+            hash.Add(Height);
+            hash.Add(Depth);
+            hash.Add(Left);
+            hash.Add(Right);
+            hash.Add(Back);
+            hash.Add(Front);
+            hash.Add(Top);
+            hash.Add(Bottom);
+            hash.Add(Center);
+            return hash.ToHashCode();
         }
 
         public static bool operator ==(Box a, Box b)

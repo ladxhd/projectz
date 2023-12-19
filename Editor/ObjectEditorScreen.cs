@@ -48,12 +48,6 @@ namespace ProjectZ.Editor
         private readonly UiTextInput[] _uiParameterTextInput = new UiTextInput[MaxParameter];
         private readonly string[] _strParameter = new string[MaxParameter];
 
-        private UiNumberInput _bezier0;
-        private UiNumberInput _bezier1;
-        private UiNumberInput _bezier2;
-        private UiNumberInput _bezier3;
-        private CubicBezier _cublicBezier;
-
         private GameObjectItem _selectedGameObjectItem;
 
         private EditorCamera _camera;
@@ -71,11 +65,6 @@ namespace ProjectZ.Editor
         public Point MouseMapPosition => new Point(
             (InputHandler.MousePosition().X - _camera.Location.X) / (int)(Values.TileSize * _camera.Scale),
             (InputHandler.MousePosition().Y - _camera.Location.Y) / (int)(Values.TileSize * _camera.Scale));
-
-        private string _currentMapPath;
-
-        private int _currentLayer;
-        private int _replaceSelection;
 
         private int _leftToolbarWidth = 200;
         private int _rightToolbarWidth = 250;
@@ -101,7 +90,6 @@ namespace ProjectZ.Editor
                 var buttonWidth = _leftToolbarWidth - 10;
                 var halfButtonWidth = buttonWidth / 2 - 2;
                 var buttonHeight = 30;
-                var lableHeight = 20;
 
                 //Game1.EditorUi.AddElement(new UiButton(
                 //    new Rectangle(5, posY += (int)(buttonHeight * 1.5f) + 5, buttonWidth, buttonHeight),
@@ -622,7 +610,7 @@ namespace ProjectZ.Editor
                 {
                     SetMapObject(
                         x * Values.TileSize / gridSize,
-                        y * Values.TileSize / gridSize, _currentLayer, GetObjectIndex(), GetObjectParameter());
+                        y * Values.TileSize / gridSize, 0, GetObjectIndex(), GetObjectParameter());
                 }
         }
 
@@ -631,7 +619,7 @@ namespace ProjectZ.Editor
             // draw or delete
             SetMapObject(
                 ObjectCursor.X * Values.TileSize / gridSize,
-                ObjectCursor.Y * Values.TileSize / gridSize, _currentLayer, GetObjectIndex(), GetObjectParameter());
+                ObjectCursor.Y * Values.TileSize / gridSize, 0, GetObjectIndex(), GetObjectParameter());
         }
 
         private void SetMapObject(int x, int y, int z, string index, object[] parameter)

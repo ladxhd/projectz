@@ -151,7 +151,6 @@ namespace ProjectZ.Editor
 
             var buttonWidthRight = RightBarWidth - buttonDist * 2;
             var buttonWidthHalfRight = (RightBarWidth - buttonDist * 3) / 2;
-            var buttonHeightRight = 25;
 
             posY = Values.ToolBarHeight + buttonDist;
             var inputPosY = posY;

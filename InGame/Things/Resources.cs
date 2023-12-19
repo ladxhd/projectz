@@ -31,7 +31,6 @@ namespace ProjectZ.InGame.Things
         public static Effect BlurEffectH;
         public static Effect BBlurEffectV;
         public static Effect BBlurEffectH;
-        public static Effect BBlurMapping;
         public static Effect FullShadowEffect;
         public static Effect SaturationEffect;
         public static Effect WobbleEffect;

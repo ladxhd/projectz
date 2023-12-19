@@ -64,7 +64,6 @@ namespace ProjectZ.InGame.GameObjects.Things
                 var cloudX = posX - 80;
                 var cloudY = posY + 56;
                 var offset0 = 0.8f;
-                var offset1 = 0.75f;
 
                 _clouds.Add(new CloudPart() { position = new Vector2(cloudX, cloudY + 8), color0 = colorRed0, color1 = colorRed1, offset = offset0 });
                 _clouds.Add(new CloudPart() { position = new Vector2(cloudX + 8, cloudY), color0 = colorRed0, color1 = colorRed1, offset = offset0 });
@@ -75,7 +74,6 @@ namespace ProjectZ.InGame.GameObjects.Things
                 var cloudX = posX + 80;
                 var cloudY = posY - 32;
                 var offset0 = 0.8f;
-                var offset1 = 0.75f;
 
                 _clouds.Add(new CloudPart() { position = new Vector2(cloudX, cloudY + 8), color0 = colorGreen, color1 = colorWhite, offset = offset0 });
                 _clouds.Add(new CloudPart() { position = new Vector2(cloudX + 8, cloudY), color0 = colorGreen, color1 = colorWhite, offset = offset0 });
@@ -86,7 +84,6 @@ namespace ProjectZ.InGame.GameObjects.Things
                 var cloudX = posX + 88;
                 var cloudY = posY + 40;
                 var offset0 = 0.8f;
-                var offset1 = 0.75f;
 
                 _clouds.Add(new CloudPart() { position = new Vector2(cloudX, cloudY + 8), color0 = colorLila0, color1 = colorWhite, offset = offset0 });
                 _clouds.Add(new CloudPart() { position = new Vector2(cloudX + 8, cloudY), color0 = colorLila0, color1 = colorWhite, offset = offset0 });

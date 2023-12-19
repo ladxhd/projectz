@@ -60,8 +60,6 @@ namespace ProjectZ.InGame.Interface
 
             var left = 0;
             var right = Size.X;
-            var top = 0;
-            var down = Size.Y;
 
             foreach (var element in Elements)
             {
