@@ -93,8 +93,7 @@ namespace ProjectZ.InGame.GameSystems
 
             if (CurrentState != TransitionState.Idle)
                 Game1.GameManager.InGameOverlay.DisableOverlayToggle = true;
-            else
-                Game1.GbsPlayer.SetVolumeMultiplier(1);
+            
 
             if (CurrentState == TransitionState.TransitionOut)
             {
