@@ -33,7 +33,8 @@ namespace ProjectZ.InGame.GameObjects.Things
             {
                 var track = _musicData[position.X, position.Y];
 
-                if (_lastTrack != track)
+                // dont change tracks and do fadeout if current track is the new game track before you get your sword
+                if (_lastTrack != track && Game1.GbsPlayer.CurrentTrack != 28)
                 {
                     _lastTrack = track;
                     _transitionCount += Game1.DeltaTime;
