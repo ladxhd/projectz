@@ -61,11 +61,11 @@
     <Exec Command="dotnet tool restore" />
   </Target>
   <Target Name="PreContentBuild" BeforeTargets="RunContentBuilder">
-    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.png&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Content/&quot; &quot;$(SolutionDir)&quot;" />
-    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.wav&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Content/&quot; &quot;$(SolutionDir)&quot;" />
-    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.ico&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
-    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.png&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
-    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.gbs&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
-    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.lng&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Data/&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.png&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Content&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.wav&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/Content&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.ico&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/bin/Data&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.png&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/bin/Data&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.gbs&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/bin/Data&quot; &quot;$(SolutionDir)&quot;" />
+    <Exec Command="rsync -arvh --mkpath --include=&quot;*/&quot; --include=&quot;*.lng&quot; --exclude=&quot;*&quot; &quot;$(SolutionDir)Source/ProjectZ/bin/Data&quot; &quot;$(SolutionDir)&quot;" />
   </Target>
 </Project>
