@@ -33,8 +33,12 @@ namespace ProjectZ.InGame.GameObjects.Things
             {
                 var track = _musicData[position.X, position.Y];
 
-                // dont change tracks and do fadeout if current track is the new game track before you get your sword
-                if (_lastTrack != track && Game1.GbsPlayer.CurrentTrack != 28)
+                // dont change tracks and do fadeout if current track is
+                //     the new game track before you get your sword or
+                //     the piece of power track
+                if (_lastTrack != track 
+                    && Game1.GbsPlayer.CurrentTrack != 28
+                    && Game1.GbsPlayer.CurrentTrack != 72)
                 {
                     _lastTrack = track;
                     _transitionCount += Game1.DeltaTime;
@@ -44,12 +48,15 @@ namespace ProjectZ.InGame.GameObjects.Things
             if (_transitionCount > 0)
             {
                 // fade out current music
-                var transitionState = _transitionCount / 1000;
-                var newVolume = 1 - MathHelper.Clamp(transitionState, 0, 1);
-                Game1.GbsPlayer.SetVolumeMultiplier(newVolume);
+                if (Game1.GbsPlayer.GetVolumeMultiplier() > 0)
+                {
+                    var transitionState = _transitionCount / 1000;
+                    var newVolume = 1 - MathHelper.Clamp(transitionState, 0, 1);
+                    Game1.GbsPlayer.SetVolumeMultiplier(newVolume);
+                }
 
                 // transition to new music
-                if (int.TryParse(_lastTrack, out var songNr) && newVolume <= 0)
+                if (int.TryParse(_lastTrack, out var songNr) && Game1.GbsPlayer.GetVolumeMultiplier() <= 0)
                 {
                     Game1.GameManager.SetMusic(songNr, 0, false);
                     Game1.GbsPlayer.SetVolumeMultiplier(1);
