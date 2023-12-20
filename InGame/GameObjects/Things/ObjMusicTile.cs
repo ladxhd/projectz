@@ -36,9 +36,7 @@ namespace ProjectZ.InGame.GameObjects.Things
                 // dont change tracks and do fadeout if current track is
                 //     the new game track before you get your sword or
                 //     the piece of power track
-                if (_lastTrack != track 
-                    && Game1.GbsPlayer.CurrentTrack != 28
-                    && Game1.GbsPlayer.CurrentTrack != 72)
+                if (ShouldChangeTrack(track))
                 {
                     _lastTrack = track;
                     _transitionCount += Game1.DeltaTime;
@@ -47,8 +45,10 @@ namespace ProjectZ.InGame.GameObjects.Things
 
             if (_transitionCount > 0)
             {
+                bool doingFadeOut = ShouldFadeOutCurrentTrack();
+
                 // fade out current music
-                if (Game1.GbsPlayer.GetVolumeMultiplier() > 0)
+                if (doingFadeOut)
                 {
                     var transitionState = _transitionCount / 1000;
                     var newVolume = 1 - MathHelper.Clamp(transitionState, 0, 1);
@@ -56,9 +56,9 @@ namespace ProjectZ.InGame.GameObjects.Things
                 }
 
                 // transition to new music
-                if (int.TryParse(_lastTrack, out var songNr) && Game1.GbsPlayer.GetVolumeMultiplier() <= 0)
+                if (!doingFadeOut)
                 {
-                    Game1.GameManager.SetMusic(songNr, 0, false);
+                    Game1.GameManager.SetMusic(int.Parse(_lastTrack), 0, false);
                     Game1.GbsPlayer.SetVolumeMultiplier(1);
                     _transitionCount = 0;
                 }
@@ -67,6 +67,21 @@ namespace ProjectZ.InGame.GameObjects.Things
                     _transitionCount += Game1.DeltaTime;
                 }
             }
+        }
+
+        private bool ShouldChangeTrack(string newTrack)
+        {
+            return _lastTrack != newTrack
+                    && Game1.GbsPlayer.CurrentTrack != 28 // before sword
+                    && Game1.GbsPlayer.CurrentTrack != 72 // piece of power
+                    ;
+        }
+
+        private bool ShouldFadeOutCurrentTrack()
+        {
+            return !Game1.GbsPlayer.IsPaused()
+                && Game1.GbsPlayer.GetVolumeMultiplier() > 0
+                ;
         }
     }
 }

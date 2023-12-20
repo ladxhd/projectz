@@ -23,6 +23,7 @@ namespace GbsPlayer
 
         private Thread _updateThread;
 
+        private bool _isPaused;
         public GbsPlayer()
         {
             SoundGenerator = new Sound();
@@ -99,18 +100,21 @@ namespace GbsPlayer
         public void Play()
         {
             Cpu.IsRunning = true;
+            _isPaused = false;
         }
 
         public void Pause()
         {
             SoundGenerator.Pause();
             Cpu.IsRunning = false;
+            _isPaused = true;
         }
 
         public void Resume()
         {
             SoundGenerator.Resume();
             Cpu.IsRunning = true;
+            _isPaused = false;
         }
 
         public void Stop()
@@ -118,6 +122,7 @@ namespace GbsPlayer
             // stop music playback
             SoundGenerator.Stop();
             Cpu.IsRunning = false;
+            _isPaused = true;
         }
 
         public float GetVolume()
@@ -166,6 +171,11 @@ namespace GbsPlayer
 
                 Thread.Sleep(5);
             }
+        }
+
+        public bool IsPaused()
+        {
+            return _isPaused;
         }
     }
 }
