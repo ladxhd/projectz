@@ -243,5 +243,14 @@ namespace ProjectZ.InGame.Pages
         {
             PageStack.Clear();
         }
+
+        public void OnResize(int newWidth, int newHeight)
+        {
+            InterfacePage page = GetCurrentPage();
+            if (page is not null)
+            {
+                page.OnResize(newWidth, newHeight);
+            }
+        }
     }
 }

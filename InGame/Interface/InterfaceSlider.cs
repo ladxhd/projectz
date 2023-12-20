@@ -92,20 +92,23 @@ namespace ProjectZ.InGame.Interface
             }
         }
 
-        public void UpdateStepSize(int start, int end, int steps)
+        public void UpdateStepSize(int start, int end, int stepSize)
         {
             if (start == Start && end == End)
                 return;
 
             _updateText = true;
 
-            CurrentStep = MathHelper.Clamp(CurrentStep + Start, start, end) - start;
-
             Start = start;
             End = end;
+            StepSize = stepSize;
+            CurrentStep = MathHelper.Clamp(CurrentStep + Start, start, end) - start;
 
-            _steps = steps;
+            _steps = End - Start + 1;
             _stepWidth = (_sliderBackgroundRectangle.Width - 4) / ((float)_steps - 1);
+
+            _animationStepStart = _stepWidth * CurrentStep;
+            _animationStepPosition = _stepWidth * CurrentStep;
         }
 
         public override InputEventReturn PressedButton(CButtons pressedButton)

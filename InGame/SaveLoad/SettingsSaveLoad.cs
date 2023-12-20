@@ -1,4 +1,5 @@
-﻿using ProjectZ.InGame.Controls;
+﻿using Microsoft.Xna.Framework;
+using ProjectZ.InGame.Controls;
 using ProjectZ.InGame.Things;
 
 namespace ProjectZ.InGame.SaveLoad
@@ -19,7 +20,9 @@ namespace ProjectZ.InGame.SaveLoad
             Values.PathSaveFolder = saveManager.GetString("SavePath", Values.PathSaveFolder);
 
             GameSettings.GameScale = saveManager.GetInt("GameScale", GameSettings.GameScale);
+            GameSettings.GameScale = MathHelper.Clamp(GameSettings.GameScale, -1, 11);
             GameSettings.UiScale = saveManager.GetInt("UIScale", GameSettings.UiScale);
+            GameSettings.UiScale = MathHelper.Clamp(GameSettings.UiScale, 0, 12);
             GameSettings.MusicVolume = saveManager.GetInt("MusicVolume", GameSettings.MusicVolume);
             GameSettings.EffectVolume = saveManager.GetInt("EffectVolume", GameSettings.EffectVolume);
             GameSettings.EnableShadows = saveManager.GetBool("EnableShadows", GameSettings.EnableShadows);

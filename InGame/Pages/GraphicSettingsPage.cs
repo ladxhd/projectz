@@ -10,6 +10,7 @@ namespace ProjectZ.InGame.Pages
     {
         private readonly InterfaceListLayout _bottomBar;
         private readonly InterfaceListLayout _toggleFullscreen;
+        private InterfaceSlider _uiScaleSlider;
 
         //private InterfaceSlider _uiScaleSlider;
 
@@ -34,17 +35,22 @@ namespace ProjectZ.InGame.Pages
                 })
             { SetString = number => GameSettings.GameScale == 11 ? "auto" : " x" + (number < 1 ? "1/" + (2 - number) : number.ToString()) });
 
-            //contentLayout.AddElement(_uiScaleSlider = new InterfaceSlider(Resources.GameFont, "settings_graphics_ui_scale",
-            //    buttonWidth, new Point(1, 2), 1, Game1.ScreenScale + 1, 1, GameSettings.UiScale - 1,
-            //    number =>
-            //    {
-            //        GameSettings.UiScale = number >= Game1.ScreenScale + 1 ? 0 : number;
-            //        Game1.ScaleSettingChanged = true;
-            //    })
-            //{ SetString = number => GameSettings.UiScale == 0 ? "auto" : " x" + number });
+            _uiScaleSlider = new InterfaceSlider(Resources.GameFont, "settings_graphics_ui_scale",
+                buttonWidth, new Point(1, 2), 0, Game1.ScreenScale - 1, 1, GameSettings.UiScale,
+                number =>
+                {
+                    GameSettings.UiScale = number;
+                    Game1.ScaleSettingChanged = true;
+                })
+            { SetString = number => GameSettings.UiScale == 0 ? "auto" : " x" + number };
+            contentLayout.AddElement(_uiScaleSlider);
 
             _toggleFullscreen = InterfaceToggle.GetToggleButton(new Point(buttonWidth, 18), new Point(5, 2),
-                "settings_game_fullscreen_mode", GameSettings.IsFullscreen, newState => { Game1.ToggleFullscreen(); });
+                "settings_game_fullscreen_mode", GameSettings.IsFullscreen,
+                newState => {
+                    Game1.ToggleFullscreen();
+                    Game1.ScaleSettingChanged = true;
+                });
             contentLayout.AddElement(_toggleFullscreen);
 
             var toggleFullscreenWindowed = InterfaceToggle.GetToggleButton(new Point(buttonWidth, 18), new Point(5, 2),
@@ -108,6 +114,11 @@ namespace ProjectZ.InGame.Pages
             PageLayout.Select(InterfaceElement.Directions.Top, false);
         }
 
+        public override void OnResize(int newWidth, int newHeight)
+        {
+            UpdateScaleSlider();
+        }
+
         private void UpdateFullscreenState()
         {
             var toggle = ((InterfaceToggle)_toggleFullscreen.Elements[1]);
@@ -115,18 +126,10 @@ namespace ProjectZ.InGame.Pages
                 toggle.SetToggle(GameSettings.IsFullscreen);
         }
 
-        //private void UpdateScaleSlider()
-        //{
-        //    if (GameSettings.UiScale == 0)
-        //    {
-        //        _uiScaleSlider.UpdateStepSize(1, Game1.ScreenScale + 1, Game1.ScreenScale + 1);
-        //        _uiScaleSlider.CurrentStep = Game1.ScreenScale;
-        //    }
-        //    else
-        //    {
-        //        _uiScaleSlider.UpdateStepSize(1, Game1.ScreenScale, Game1.ScreenScale + 1);
-        //        GameSettings.UiScale = _uiScaleSlider.CurrentStep + 1;
-        //    }
-        //}
+        private void UpdateScaleSlider()
+        {
+            GameSettings.UiScale = MathHelper.Clamp(GameSettings.UiScale, 0, Game1.ScreenScale - 1);
+            _uiScaleSlider.UpdateStepSize(0, Game1.ScreenScale - 1, 1);
+        }
     }
 }
