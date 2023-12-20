@@ -924,6 +924,7 @@ namespace ProjectZ
             EditorUi.SizeChanged();
 
             ScreenManager.OnResize(WindowWidth, WindowHeight);
+            UiPageManager.OnResize(WindowWidth, WindowHeight);
         }
 
         private void UpdateRenderTargets()
