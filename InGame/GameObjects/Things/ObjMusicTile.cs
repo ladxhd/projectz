@@ -33,55 +33,14 @@ namespace ProjectZ.InGame.GameObjects.Things
             {
                 var track = _musicData[position.X, position.Y];
 
-                // dont change tracks and do fadeout if current track is
-                //     the new game track before you get your sword or
-                //     the piece of power track
-                if (ShouldChangeTrack(track))
+                if (_lastTrack != track)
                 {
                     _lastTrack = track;
-                    _transitionCount += Game1.DeltaTime;
+
+                    if (int.TryParse(track, out var songNr))
+                        Game1.GameManager.FadeOutAndSetMusic(songNr, 0, false);
                 }
             }
-
-            if (_transitionCount > 0)
-            {
-                bool doingFadeOut = ShouldFadeOutCurrentTrack();
-
-                // fade out current music
-                if (doingFadeOut)
-                {
-                    var transitionState = _transitionCount / 1000;
-                    var newVolume = 1 - MathHelper.Clamp(transitionState, 0, 1);
-                    Game1.GbsPlayer.SetVolumeMultiplier(newVolume);
-                }
-
-                // transition to new music
-                if (!doingFadeOut)
-                {
-                    Game1.GameManager.SetMusic(int.Parse(_lastTrack), 0, false);
-                    Game1.GbsPlayer.SetVolumeMultiplier(1);
-                    _transitionCount = 0;
-                }
-                else
-                {
-                    _transitionCount += Game1.DeltaTime;
-                }
-            }
-        }
-
-        private bool ShouldChangeTrack(string newTrack)
-        {
-            return _lastTrack != newTrack
-                    && Game1.GbsPlayer.CurrentTrack != 28 // before sword
-                    && Game1.GbsPlayer.CurrentTrack != 72 // piece of power
-                    ;
-        }
-
-        private bool ShouldFadeOutCurrentTrack()
-        {
-            return !Game1.GbsPlayer.IsPaused()
-                && Game1.GbsPlayer.GetVolumeMultiplier() > 0
-                ;
         }
     }
 }

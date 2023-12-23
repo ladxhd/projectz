@@ -172,6 +172,10 @@ namespace ProjectZ.InGame.Things
         // counters used to stop music
         private float[] _musicCounter = new float[MusicChannels];
 
+        // music fade out control
+        private float _musicFadeOutCount = 0;
+        private bool _musicFadeOutStartPlaying = true;
+
         public GameManager()
         {
             ResetMusic();
@@ -771,6 +775,38 @@ namespace ProjectZ.InGame.Things
                     PlayMusic();
                 }
             }
+
+            if (_musicFadeOutCount > 0)
+            {
+                var transitionState = _musicFadeOutCount / 1000;
+                var newVolume = 1 - MathHelper.Clamp(transitionState, 0, 1);
+                Game1.GbsPlayer.SetVolumeMultiplier(newVolume);
+
+                if (newVolume <= 0)
+                {
+                    Game1.GbsPlayer.SetVolumeMultiplier(1);
+
+                    // check the music we are about to play
+                    for (var i = MusicChannels - 1; i >= 0; i--)
+                    {
+                        var currentMusic = GetCurrentMusic();
+                        if (_musicArray[i] == GetCurrentMusic())
+                        {
+                            // restart the current track. this case happens when the player
+                            // walks into a new area to start a fadeout but then walks back
+                            // into the original area.
+                            Game1.GbsPlayer.StartTrack((byte)currentMusic);
+                        }
+                    }
+
+                    PlayMusic(_musicFadeOutStartPlaying);
+                    _musicFadeOutCount = 0;
+                }
+                else
+                {
+                    _musicFadeOutCount += Game1.DeltaTime;
+                }
+            }
         }
 
         public void StopMusic(bool reset = false)
@@ -817,6 +853,41 @@ namespace ProjectZ.InGame.Things
             _musicArray[priority] = songNr;
 
             PlayMusic(startPlaying);
+        }
+
+        public void FadeOutAndSetMusic(int songNr, int priority, bool startPlaying = true)
+        {
+            // @HACK: don't restart the overworld track if the version with the intro was already started;
+            // make sure to not restart the music while showing the overworld in the final sequence
+            if ((songNr == 4 && _musicArray[priority] == 48) || (priority != 2 && _musicArray[2] == 62))
+                return;
+
+            // do not fade out if we are already playing a higher priority track
+            bool doFadeOut = false;
+            for (var i = MusicChannels - 1; i >= 0; i--)
+            {
+                if (_musicArray[i] == GetCurrentMusic() && priority >= i)
+                {
+                    doFadeOut = true && !Game1.GbsPlayer.IsPaused() && _musicFadeOutCount <= 0;
+                    break;
+                }
+            }
+
+            if (doFadeOut)
+            {
+                _musicArray[priority] = songNr;
+                _musicFadeOutStartPlaying = startPlaying;
+                _musicFadeOutCount += Game1.DeltaTime;
+            }
+            else if (_musicFadeOutCount > 0) // changing tracks in the middle of a fadeout
+            {
+                _musicArray[priority] = songNr;
+                _musicFadeOutStartPlaying = startPlaying;
+            }
+            else
+            {
+                SetMusic(songNr, priority, startPlaying);
+            }
         }
 
         public int GetCurrentMusic()
