@@ -2460,12 +2460,15 @@ namespace ProjectZ.InGame.GameObjects
         private void UseSword()
         {
             if (CurrentState != State.Idle && CurrentState != State.Pushing && CurrentState != State.Rafting &&
-                (CurrentState != State.Jumping || _railJump) && (CurrentState != State.Swimming || !Map.Is2dMap))
+                (CurrentState != State.Jumping || _railJump) && (CurrentState != State.Swimming || !Map.Is2dMap)
+                && CurrentState != State.Attacking)
                 return;
 
             var slashSounds = new[] { "D378-02-02", "D378-20-14", "D378-21-15", "D378-24-18" };
             Game1.GameManager.PlaySoundEffect(slashSounds[Game1.RandomNumber.Next(0, 4)]);
 
+            Animation.Stop();
+            AnimatorWeapons.Stop();
             Animation.Play("attack_" + Direction);
             AnimatorWeapons.Play("attack_" + Direction);
             _swordChargeCounter = SwordChargeTime;
