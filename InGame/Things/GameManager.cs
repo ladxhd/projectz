@@ -852,7 +852,15 @@ namespace ProjectZ.InGame.Things
 
             _musicArray[priority] = songNr;
 
-            PlayMusic(startPlaying);
+            if (_musicFadeOutCount > 0) // changing tracks in the middle of a fadeout
+            {
+                _musicArray[priority] = songNr;
+                _musicFadeOutStartPlaying = startPlaying;
+            }
+            else
+            {
+                PlayMusic(startPlaying);
+            }
         }
 
         public void FadeOutAndSetMusic(int songNr, int priority, bool startPlaying = true)
