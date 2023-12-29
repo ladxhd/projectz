@@ -275,7 +275,7 @@ namespace ProjectZ.InGame.GameObjects
 
             ObjectTemplates.Add("animatorL", new GameObjectTemplate(typeof(ObjAnimator), new object[] { 0, null, null, false }));
 
-            ObjectTemplates.Add("fog", new GameObjectTemplate(typeof(ObjFog), new object[] { 1.0f, 0.4f }));
+            ObjectTemplates.Add("fog", new GameObjectTemplate(typeof(ObjFog), new object[] { 1.0f, 0.8f }));
 
             ObjectTemplates.Add("break_real_stuff_start", null);
 
