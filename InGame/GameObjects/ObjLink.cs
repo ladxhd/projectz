@@ -1568,7 +1568,7 @@ namespace ProjectZ.InGame.GameObjects
                     Game1.GameManager.PlaySoundEffect("D360-43-2B", false);
                 }
 
-                if (Game1.GbsPlayer.SoundGenerator.WasStopped && Game1.GbsPlayer.SoundGenerator.FinishedPlaying())
+                if (Game1.GbsPlayer.SoundGenerator.WasStopped) // Gatordile - instrument softlock glitch fix
                 {
                     Game1.GameManager.SetMusic(-1, 0);
                     Game1.GameManager.SetMusic(-1, 2);
