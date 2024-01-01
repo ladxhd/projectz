@@ -309,7 +309,7 @@ namespace ProjectZ.InGame.GameObjects.MidBoss
             if (_hitRepelling)
                 return Values.HitCollision.RepellingParticle;
 
-            if ((damageType & HitType.PegasusBootsSword) != 0)
+            if (((damageType & HitType.SwordSpin) != 0) || ((damageType & HitType.Bow) != 0)) //gatordile - original hit types
             {
                 var hitCollision = _aiDamageState.OnHit(gameObject, direction, damageType, damage, pieceOfPower);
 
