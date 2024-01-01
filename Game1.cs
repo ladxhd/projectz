@@ -216,6 +216,9 @@ namespace ProjectZ
             Content.RootDirectory += "/bin/MacOSX";
 #endif
 
+            // game control stuff
+            ControlHandler.Initialize();
+
             // load game settings
             SettingsSaveLoad.LoadSettings();
 
@@ -231,9 +234,6 @@ namespace ProjectZ
 
             // Input Handler
             Components.Add(new InputHandler(this));
-
-            // game control stuff
-            ControlHandler.Initialize();
 
             // load the intro screen + the resources needed for it
             Resources.LoadIntro(Graphics.GraphicsDevice, Content);
