@@ -3213,7 +3213,7 @@ namespace ProjectZ.InGame.GameObjects
                     _itemShowCounter = 250;
 
                     if (ShowItem.Name == "sword1")
-                        _itemShowCounter = 5850;
+                        _itemShowCounter = 5650;
                     else if (ShowItem.Name.StartsWith("instrument"))
                         _itemShowCounter = 1000;
                 }
