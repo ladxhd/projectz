@@ -136,7 +136,7 @@ namespace ProjectZ.InGame.GameObjects.NPCs
             var neededSteps = Game1.GameManager.MaxHearths * 4 - Game1.GameManager.CurrentHealth;
             _healStepAmount = Math.Clamp((int)Math.Ceiling(neededSteps / (float)healingSteps), 1, 8);
 
-            Game1.GameManager.SetMusic(11, 2);
+            Game1.GameManager.FadeOutAndSetMusic(11, 2);
             Game1.GameManager.StartDialogPath("fairy");
         }
 
@@ -177,7 +177,7 @@ namespace ProjectZ.InGame.GameObjects.NPCs
         private void InitDespawning()
         {
             _despawnCounter = DespawnTime;
-            Game1.GameManager.SetMusic(-1, 2);
+            Game1.GameManager.FadeOutAndSetMusic(-1, 2);
         }
 
         private void UpdateDespawning()

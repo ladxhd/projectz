@@ -11,8 +11,8 @@ namespace ProjectZ.InGame.GameObjects.Things
     {
         private string[,] _musicData;
         private string _lastTrack;
+        private float _transitionCount;
 
-        // @TODO: fade in/out
         public ObjMusicTile() : base("editor music") { }
 
         public ObjMusicTile(Map.Map map, int posX, int posY) : base(map)
@@ -38,7 +38,7 @@ namespace ProjectZ.InGame.GameObjects.Things
                     _lastTrack = track;
 
                     if (int.TryParse(track, out var songNr))
-                        Game1.GameManager.SetMusic(songNr, 0, false);
+                        Game1.GameManager.FadeOutAndSetMusic(songNr, 0, false);
                 }
             }
         }
