@@ -45,7 +45,6 @@ namespace GbsPlayer
         private short _square1Frequency;
         private double _modeOneFreqCounter;
         private double _modeOneFreqTime;
-        private bool _modeOneFreqDuty;
         private byte _square1WaveCounter;
 
         private bool _modeOneCounterEnable;

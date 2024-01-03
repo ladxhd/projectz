@@ -21,8 +21,6 @@ namespace ProjectZ.InGame.GameObjects.Things
         private readonly string _strKey;
         private readonly int _moveTime = 650;
 
-        private bool _moved;
-
         public ObjMermaidStatue() : base("mermaid_statue") { }
 
         public ObjMermaidStatue(Map.Map map, int posX, int posY, string strKey) : base(map)
@@ -79,7 +77,7 @@ namespace ProjectZ.InGame.GameObjects.Things
                 Game1.GameManager.PlaySoundEffect("D378-04-04");
                 _aiComponent.ChangeState("preMoving");
             }
-            else if (!_moved)
+            else
             {
                 Game1.GameManager.StartDialogPath("mermaid_statue_0");
             }

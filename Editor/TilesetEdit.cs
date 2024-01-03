@@ -46,10 +46,6 @@ namespace ProjectZ.Editor
         private int _selctionEnd;
         private int _tileSize = 16;
 
-        private int _selectionStart;
-        public int[,] SelectedTiles;
-
-        private bool _selecting;
         private int _outputWidth = 15;
         private int _outputHeight;
 

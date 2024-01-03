@@ -31,17 +31,6 @@ namespace ProjectZ.InGame.Tests
         private float _counter;
         private float ChangeTime = 25;
 
-        private float DigTime = 500;
-        private bool _hasDug;
-
-        private float BombTime = 650;
-        private bool _hasBombed;
-
-        private float BallTime = 350;
-        private bool _hasSpawnedBalls;
-
-        private bool _isRunning;
-        private bool _paused = true;
 
         public MapTest()
         {
@@ -58,7 +47,6 @@ namespace ProjectZ.InGame.Tests
 
         private void Start()
         {
-            _isRunning = true;
             _counter = ChangeTime;
 
             Game1.ScreenManager.ChangeScreen(Values.ScreenNameGame);
@@ -72,79 +60,6 @@ namespace ProjectZ.InGame.Tests
                 SpawnCurrentTester();
             if (InputHandler.KeyPressed(Keys.B))
                 SpawnBalls();
-
-            return;
-
-            if (!_isRunning)
-            {
-                if (Game1.FinishedLoading)
-                    Start();
-
-                return;
-            }
-
-            if (InputHandler.KeyPressed(Keys.Space))
-            {
-                _paused = !_paused;
-                InputHandler.ResetInputState();
-            }
-            if (InputHandler.KeyPressed(Keys.D1))
-            {
-                _paused = true;
-                OffsetMap(-1);
-            }
-            if (InputHandler.KeyPressed(Keys.D2))
-            {
-                _paused = true;
-                OffsetMap(1);
-            }
-
-            var direction = ControlHandler.GetMoveVector2();
-            if (direction.Length() > 0)
-            {
-                _cameraPosition += direction * Game1.TimeMultiplier * 2.5f;
-                Game1.GameManager.MapManager.CurrentMap.CameraTarget = _cameraPosition;
-                MapManager.Camera.ForceUpdate(Game1.GameManager.MapManager.GetCameraTarget());
-            }
-
-            // close the textbox overlay
-            if (Game1.GameManager.InGameOverlay.TextboxOverlay.IsOpen)
-                Game1.GameManager.InGameOverlay.TextboxOverlay.Init();
-
-            if (!_paused)
-                _counter -= Game1.DeltaTime;
-
-
-            //if (_counter < BombTime && !_hasBombed)
-            //{
-            //    Bomb();
-            //    DestroyStones();
-            //    _hasBombed = true;
-            //}
-
-            //if (_counter < DigTime && !_hasDug)
-            //{
-            //    Dig();
-            //    _hasDug = true;
-            //}
-
-            //if (_counter < BallTime && !_hasSpawnedBalls)
-            //{
-            //    SpawnBallsField();
-            //    _hasSpawnedBalls = true;
-            //}
-
-            // change map?
-            if (_counter < 0)
-            {
-                _counter = ChangeTime;
-                _hasDug = false;
-                _hasBombed = false;
-                _hasSpawnedBalls = false;
-
-                if (!UpdateView())
-                    OffsetMap(1);
-            }
         }
 
         private void OffsetMap(int offset)
@@ -290,12 +205,6 @@ namespace ProjectZ.InGame.Tests
                         _keyList.Add(saveKey, 1);
                 }
             }
-        }
-
-        private void CheckMusic()
-        {
-            if (Game1.GameManager.MapManager.CurrentMap.MapMusic[0] == -1)
-                _paused = true;
         }
 
         private void SpawnBalls()

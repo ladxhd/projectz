@@ -62,14 +62,7 @@ namespace GbsPlayer
         private float updateCycleCounter;
         private float maxPlayCycles = maxPlayCycles60;
 
-        private int divCounter;
-        private int timerCounter;
-
         private int currentInstruction;
-
-        private double updateCount;
-
-        private double soundDebugCounter;
 
         private bool _finishedInit;
         private bool _calledPlay;
@@ -127,7 +120,6 @@ namespace GbsPlayer
             _memory.Init();
             _gbSound.Init();
 
-            updateCount = 0;
             cycleCount = 0;
             lastCycleCount = 0;
 
